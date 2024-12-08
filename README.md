@@ -99,7 +99,7 @@ Screen.md emerged from my need for a simple yet powerful terminal-based markdown
 
 ## 📸 Screenshots
 
-*Coming soon - The application is still in early development*
+![preview](preview.mp4)
 
 ## 📄 License
 

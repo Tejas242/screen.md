@@ -12,50 +12,91 @@ import (
 	"screen.md/internal/ui"
 )
 
-const initialText = `# Welcome to Screen.md!
+const initialText = `# Welcome to My Markdown Document
 
-This is a paragraph.
+This is a **dummy markdown file** created to showcase the use of Markdown formatting in a document. Markdown is a lightweight markup language often used for README files, documentation, and content writing.
 
-This is another paragraph.
+---
 
-## Features
-- Real-time preview
-- Split view
-- Syntax highlighting
+## Introduction
 
-### Code Example:
+Markdown allows you to write text that is:
+- **Easy to read**
+- **Quick to write**
+- **Portable across platforms**
+
+It is widely used in platforms like **GitHub**, **Notion**, and **Visual Studio Code**.
+
+---
+
+## Key Features
+
+### 1. Text Formatting
+- *Italic*: _This text is italicized._
+- **Bold**: __This text is bolded.__
+- ~~Strikethrough~~: This text is crossed out.
+
+### 2. Lists
+- **Ordered Lists**:
+  1. Item one
+  2. Item two
+  3. Item three
+
+- **Unordered Lists**:
+  - Item A
+  - Item B
+  - Item C
+
+### 3. Links and Images
+- **Hyperlinks**: [Markdown Guide](https://www.markdownguide.org)
+- **Images**:
+![Markdown Logo](https://upload.wikimedia.org/wikipedia/commons/4/48/Markdown-mark.svg)
+
+---
+
+Markdown also supports code blocks:
 ` + "```go" + `
 func main() {
     fmt.Println("Hello!")
 }
 ` + "```" + `
+
+## Tables in Markdown
+| **Name**      | **Age** | **Occupation**       | **Country**  |
+|---------------|---------|----------------------|--------------|
+| Tejas Mahajan | 20      | Student, CSE         | India        |
+| John Doe      | 25      | Software Developer   | USA          |
+| Jane Smith    | 28      | Data Scientist       | UK           |
+| Ali Khan      | 22      | Cybersecurity Expert | Pakistan     |
+
 `
 
 type Model struct {
-	editor      textarea.Model
-	preview     viewport.Model
-	renderer    *glamour.TermRenderer
-	help        ui.HelpModel
-	spinner     spinner.Model
-	ready       bool
-	width       int
-	height      int
-	focus       ui.Focus
-	loading     bool
-	transition  float64
-	lastContent string
-	clipboard   *ClipboardManager
-	selection   string // Track selected/copied text
-	clipboardOp string // Track last clipboard operation
+	editor       textarea.Model
+	preview      viewport.Model
+	renderer     *glamour.TermRenderer
+	help         ui.HelpModel
+	spinner      spinner.Model
+	ready        bool
+	width        int
+	height       int
+	focus        ui.Focus
+	loading      bool
+	transition   float64
+	lastContent  string
+	clipboard    *ClipboardManager
+	selection    string
+	clipboardOp  string
+	isFullScreen bool
 }
 
 func NewModel() Model {
 	ta := textarea.New()
-	ta.SetWidth(50)
-	ta.SetHeight(20)
 	ta.ShowLineNumbers = true
 	ta.Focus()
+	ta.CharLimit = 1000000
 	ta.SetValue(initialText)
+	ta.SetCursor(0)
 
 	vp := viewport.New(50, 20)
 
@@ -63,14 +104,6 @@ func NewModel() Model {
 		glamour.WithAutoStyle(),
 		glamour.WithWordWrap(80),
 		glamour.WithEmoji(),
-		glamour.WithStylesFromJSONBytes([]byte(`{
-            "document": { "margin": 1 },
-            "block_quote": { "margin": 1, "indent": 2 },
-            "paragraph": { "margin": 1 },
-            "list": { "margin": 1, "level_indent": 2 },
-            "heading": { "margin": 1 },
-            "code_block": { "margin": 1 }
-        }`)),
 	)
 
 	return Model{
@@ -160,9 +193,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if m.focus == ui.EditorFocus {
 				m.focus = ui.PreviewFocus
 				m.editor.Blur()
+				m.isFullScreen = true
 			} else {
 				m.focus = ui.EditorFocus
 				m.editor.Focus()
+				m.isFullScreen = true
 			}
 		}
 
@@ -273,12 +308,12 @@ func (m *Model) resizeComponents(msg tea.WindowSizeMsg) {
 	verticalMarginHeight := 2
 
 	bodyHeight := msg.Height - headerHeight - footerHeight - verticalMarginHeight
-	halfWidth := (msg.Width - 4) / 2
+	fullWidth := msg.Width - 4
 
-	m.editor.SetWidth(halfWidth)
+	m.editor.SetWidth(fullWidth)
 	m.editor.SetHeight(bodyHeight)
 
-	m.preview.Width = halfWidth
+	m.preview.Width = fullWidth
 	m.preview.Height = bodyHeight
 
 	if !m.ready {
@@ -301,9 +336,9 @@ func (m Model) getTitleBar() string {
 }
 
 func (m Model) getStatusBar() string {
-	mode := "Editor"
+	mode := "Editor Mode"
 	if m.focus == ui.PreviewFocus {
-		mode = "Preview"
+		mode = "Preview Mode"
 	}
 
 	if m.clipboardOp != "" {
@@ -321,9 +356,8 @@ func (m Model) getMainContent() string {
 	editorStyle := ui.EditorStyle(m.focus == ui.EditorFocus)
 	previewStyle := ui.PreviewStyle(m.focus == ui.PreviewFocus)
 
-	return lipgloss.JoinHorizontal(
-		lipgloss.Center,
-		editorStyle.Render(m.editor.View()),
-		previewStyle.Render(m.preview.View()),
-	)
+	if m.focus == ui.EditorFocus {
+		return editorStyle.Render(m.editor.View())
+	}
+	return previewStyle.Render(m.preview.View())
 }
