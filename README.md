@@ -2,7 +2,8 @@
 
 # Screen.md
 
-![logo](logo.webp)
+<img src="logo.webp" alt="logo" width="200" height="auto">
+
 A beautiful, terminal-based Markdown editor and previewer for distraction-free writing
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -10,8 +11,6 @@ A beautiful, terminal-based Markdown editor and previewer for distraction-free w
 [![Status](https://img.shields.io/badge/status-alpha-orange.svg)](#status)
 
 [Features](#✨-features) • [Installation](#💿-installation) • [Usage](#📖-usage) • [Contributing](#🤝-contributing)
-
-![Screen.md Preview](path/to/screenshot.png)
 
 </div>
 
