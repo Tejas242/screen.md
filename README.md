@@ -1,112 +1,113 @@
-# Screen.md 📝
+<div align="center">
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Go Version](https://img.shields.io/badge/go-%3E%3D%201.16-00ADD8.svg)
-![Status](https://img.shields.io/badge/status-alpha-orange.svg)
+# Screen.md
 
-Screen.md is a beautiful, terminal-based Markdown editor and previewer designed for distraction-free writing and blogging. Built with Go and the Charm libraries, it offers a modern, efficient interface for crafting Markdown content right in your terminal.
+![logo](logo.webp)
+A beautiful, terminal-based Markdown editor and previewer for distraction-free writing
 
----
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Go Version](https://img.shields.io/badge/go-%3E%3D%201.16-00ADD8.svg)](https://golang.org/)
+[![Status](https://img.shields.io/badge/status-alpha-orange.svg)](#status)
 
-> 🚧 **Note**: This project is under active development. Features and UI may change as it evolves to better suit writing needs.
+[Features](#✨-features) • [Installation](#💿-installation) • [Usage](#📖-usage) • [Contributing](#🤝-contributing)
 
----
+![Screen.md Preview](path/to/screenshot.png)
 
-## 🛣️ Roadmap
+</div>
 
-- [x] Basic editor and preview layout
-- [x] Real-time markdown rendering
-- [x] Syntax highlighting
-- [ ] Vim mode support
-- [ ] File saving/loading
-- [ ] Custom theme support
-- [ ] Image preview support (terminal-compatible)
-- [ ] Configuration file support
+## ✨ Features
 
-- [ ] LLM Integration for writing assistance
-- [ ] Git integration for version control
-- [ ] Custom markdown extensions
-- [ ] Spell checking
-- [ ] Table of contents generation
+- 📏 **Split-view Interface** - Edit and preview simultaneously
+- 🎨 **Real-time Rendering** - See your changes as you type
+- 🌈 **Syntax Highlighting** - Beautiful code presentation
+- ⚡ **Lightweight & Fast** - Built with Go for optimal performance
+- 📱 **Terminal-native** - Works where you work
 
-- [ ] Multiple file support with tabs
-- [ ] Search and replace
-- [ ] Custom snippets
-- [ ] Export to various formats (PDF, HTML)
+## 🚧 Status
 
-## 🎯 Quick Start
+Screen.md is currently in **alpha**. While core features are functional, expect changes and improvements as development continues.
+
+## 💿 Installation
 
 ### Prerequisites
 - Go 1.16 or higher
 - Git
 
-### Installation
-
 ```bash
 # Clone the repository
 git clone https://github.com/tejas242/screen.md.git
 
-# Navigate to the project directory
+# Install and run
 cd screen.md
-
-# Install dependencies
 go mod tidy
-
-# Build and run
 go run main.go
 ```
 
-## 🎮 Usage
+## 📖 Usage
 
-### Keyboard Shortcuts
-- `Tab` - Switch between editor and preview
-- `Ctrl+C` / `Esc` - Exit the application
-- `↑/↓` - Scroll in preview mode
-- Regular text editing keys work as expected
+### Basic Controls
+- `Tab` - Toggle between editor and preview
+- `Ctrl+C` / `Esc` - Exit
+- `↑/↓` - Navigate preview
+- Standard text editing keys
 
-### Writing
-1. Start the application
-2. Begin typing in the editor (left pane)
-3. Watch your markdown render in real-time (right pane)
-4. Use Tab to switch focus when you want to scroll through the preview
+### Getting Started
+1. Launch Screen.md
+2. Start writing in the left pane
+3. See live preview in the right pane
+4. Use Tab to switch between modes
 
+## 🛣️ Development Roadmap
 
-## 🔧 Development
+### Phase 1 - Core Features
+- [x] Basic editor/preview layout
+- [x] Live markdown rendering
+- [x] Syntax highlighting
+- [ ] File operations (save/load)
+- [ ] Vim mode support
 
-MarkdownFlow is built with:
+### Phase 2 - Enhanced Features
+- [ ] Custom themes
+- [ ] Image previews
+- [ ] Configuration system
+- [ ] Git integration
+- [ ] LLM assistance
+
+### Phase 3 - Advanced Features
+- [ ] Multi-file support
+- [ ] Search and replace
+- [ ] Custom snippets
+- [ ] Export options
+
+## 🔧 Technical Stack
+
 - [Bubble Tea](https://github.com/charmbracelet/bubbletea) - TUI framework
 - [Glamour](https://github.com/charmbracelet/glamour) - Markdown rendering
-- [Lipgloss](https://github.com/charmbracelet/lipgloss) - Style definitions
+- [Lipgloss](https://github.com/charmbracelet/lipgloss) - Styling
 - [Chroma](https://github.com/alecthomas/chroma) - Syntax highlighting
-
-### Project Structure (May change in future)
-```
-markdownflow/
-├── main.go        # Main application code
-├── go.mod         # Go module definition
-├── go.sum         # Dependencies checksum
-└── README.md      # Documentation
-```
 
 ## 🤝 Contributing
 
-While this is primarily a personal utility tool, suggestions and feedback are welcome! Feel free to:
-1. Open issues for bugs or feature suggestions
-2. Submit pull requests for improvements
-3. Share ideas for new features
+While Screen.md is currently a personal project, feedback and suggestions are welcome:
 
-## 📝 Personal Note
+1. 🐛 [Report bugs](https://github.com/tejas242/screen.md/issues)
+2. 💡 [Suggest features](https://github.com/tejas242/screen.md/issues)
+3. 📝 [Submit pull requests](https://github.com/tejas242/screen.md/pulls)
 
-I created MarkdownFlow as a personal tool for writing blog posts and documentation. It's designed to be minimal yet powerful, focusing on the writing experience while providing modern features that make markdown editing more enjoyable.
+## 💭 Personal Note
+
+Screen.md emerged from my need for a simple yet powerful terminal-based markdown editor. It's designed to enhance the writing experience while maintaining the efficiency of terminal-based workflows.
 
 ## 📸 Screenshots
 
-[screenshots here showing:
-1. Main interface with editor and preview
-2. Different focus modes
-3. Sample markdown rendering
-4. Any special features]
+*Coming soon - The application is still in early development*
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Screen.md is open-source software licensed under the [MIT license](LICENSE).
+
+---
+
+<div align="center">
+Made with ❤️ by <a href="https://github.com/tejas242">Tejas</a>
+</div>
